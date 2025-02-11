@@ -5,7 +5,7 @@
   - Both of the NuGet Packages above should be installed
 - Managed Identity must be enabled for the Function App
 - Storage Account requires `Storage Blob Owner`, `Storage Queue Contributor` and `Storage Blob Contributor` **Roles** assigned to the **Function App Managed Identity**
-d
+
 
 ``` csharp
 using Azure.Identity;
