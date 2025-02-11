@@ -1,4 +1,6 @@
 # Important Note
+- Possible to use the Release Version out of the box, ensure the ENVIRONMENT VARIABLE `STORAGE_NAME` is set in the Azure Portal for the Function App to know the name of the Storage Account
+
 - Must add in the necessary libraries into `Program.cs`: `Azure.Identity` and `Microsoft.Extensions.Azure`
   - Both of the NuGet Packages above should be installed
 - Managed Identity must be enabled for the Function App
@@ -7,7 +9,17 @@ d
 
 ``` csharp
 using Azure.Identity;
+using Microsoft.Azure.Functions.Worker.Builder;
 using Microsoft.Extensions.Azure;
+using Microsoft.Extensions.Hosting;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        var builder = FunctionsApplication.CreateBuilder(args);
+
+        builder.ConfigureFunctionsWebApplication();
 
         // Application Insights isn't enabled by default. See https://aka.ms/AAt8mw4.
         builder.Services
@@ -15,12 +27,20 @@ using Microsoft.Extensions.Azure;
              {
                  // Add AddBlobServiceClient intended with managed identity and providing simply the storage URI
 
+                 string storName = Environment.GetEnvironmentVariable("STORAGE_NAME") ?? "NO_STORAGE_NAME_FOUND";
+
                  clientBuilder
-                        .AddBlobServiceClient(new Uri("https://testfunc56563stor.blob.core.windows.net/"))
+                        .AddBlobServiceClient(new Uri("https://" + storName + "blob.core.windows.net/"))
                         .WithName("copierOutputBlob")
                         .WithCredential(new DefaultAzureCredential());
              });
 
+        //     .AddApplicationInsightsTelemetryWorkerService()
+        //     .ConfigureFunctionsApplicationInsights();
+
+        builder.Build().Run();
+    }
+}
 ```
 
 # Finally, the Trigger Code
