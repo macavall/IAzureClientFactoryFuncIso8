@@ -6,8 +6,7 @@
 - Managed Identity must be enabled for the Function App
 - Storage Account requires `Storage Blob Owner`, `Storage Queue Contributor` and `Storage Blob Contributor` **Roles** assigned to the **Function App Managed Identity**
 
-![image](https://github.com/user-attachments/assets/62d38d24-fe42-49cf-833f-8c3876d6e216)
-
+![image](https://github.com/user-attachments/assets/d627298a-c5b5-4ff5-8896-a6fc4a7953f9)
 
 
 ``` csharp
