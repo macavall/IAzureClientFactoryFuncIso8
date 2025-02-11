@@ -20,7 +20,7 @@ public class Program
                  string storName = Environment.GetEnvironmentVariable("STORAGE_NAME") ?? "NO_STORAGE_NAME_FOUND";
 
                  clientBuilder
-                        .AddBlobServiceClient(new Uri("https://" + storName + "blob.core.windows.net/"))
+                        .AddBlobServiceClient(new Uri("https://" + storName + ".blob.core.windows.net/"))
                         .WithName("copierOutputBlob")
                         .WithCredential(new DefaultAzureCredential());
              });
