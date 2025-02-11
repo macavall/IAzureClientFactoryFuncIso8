@@ -1,4 +1,7 @@
-
+# Important Note
+- Must add in the necessary libraries into `Program.cs`: `Azure.Identity` and `Microsoft.Extensions.Azure`
+- Managed Identity must be enabled for the Function App
+- Storage Account requires `Storage Blob Owner` and `Storage Blob Contributor` **Roles** assigned to the **Function App Managed Identity**
 
 
 ``` csharp
